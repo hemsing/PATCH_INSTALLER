@@ -1,0 +1,1694 @@
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="configurations">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="configuration" maxOccurs="unbounded"
+					minOccurs="1">
+					<xs:complexType>
+						<xs:all>
+							<xs:element type="xs:float" name="installerversion"></xs:element>
+							<xs:element type="xs:string" name="productname"></xs:element>
+							<xs:element type="xs:string" name="productversion" />
+ 						    <xs:element type="xs:string" name="mincompatibleversion" />
+							<xs:element name="mincompatibleversions">
+								<xs:element name="version" maxOccurs="unbounded"
+									minOccurs="0">
+								</xs:element>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="installsequence">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="preinstall">
+								<xs:complexType>
+									<xs:all>
+										<xs:element name="servicecommands">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="stopservice" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute type="xs:string" name="validateProcessText" />
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="stopprocess" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="kill" default="N">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="Y" />
+																				<xs:enumeration value="N" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="startservice" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute type="xs:string" name="validateProcessText" />
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="startprocess" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="oscommands">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="oscommand" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="fileoperations">
+											<xs:complexType>
+												<xs:all>
+													<xs:element name="backup" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="file"
+																	maxOccurs="unbounded" minOccurs="0" />
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="delete" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="file"
+																	maxOccurs="unbounded" minOccurs="0" />
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="copy" maxOccurs="1" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="copyFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="copyTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="folder" maxOccurs="unbounded"
+																	minOccurs="0" fixed="">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="copyFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="copyTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="move" maxOccurs="1" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="moveFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="moveTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="folder" maxOccurs="unbounded"
+																	minOccurs="0" fixed="">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="moveFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="moveTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="rename" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="name"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="newname"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:all>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="sqls">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="sql" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="instancename" />
+																<xs:choice>
+																	<xs:element name="filename" minOccurs="0">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="xs:string">
+																					<xs:attribute type="xs:string" name="sqldelimiter" />
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element type="xs:string" name="sqlstatement"
+																		minOccurs="0" />
+																</xs:choice>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="properties">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="property" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="name" type="xs:string"
+																	minOccurs="0" />
+																<xs:element name="value" type="xs:string"
+																	minOccurs="0" />
+															</xs:sequence>
+															<xs:attribute name="operation">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="add" />
+																		<xs:enumeration value="delete" />
+																		<xs:enumeration value="modify" />
+																		<xs:enumeration value="rename" />
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute type="xs:string" name="file"
+																use="required" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="install">
+								<xs:complexType>
+									<xs:all>
+										<xs:element name="servicecommands">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="stopservice" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute type="xs:string" name="validateProcessText" />
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="stopprocess" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="kill" default="N">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="Y" />
+																				<xs:enumeration value="N" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="startservice" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute type="xs:string" name="validateProcessText" />
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="startprocess" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="oscommands">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="oscommand" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="fileoperations">
+											<xs:complexType>
+												<xs:all>
+													<xs:element name="backup" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="file"
+																	maxOccurs="unbounded" minOccurs="0" />
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="delete" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="file"
+																	maxOccurs="unbounded" minOccurs="0" />
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="copy" maxOccurs="1" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="copyFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="copyTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="folder" maxOccurs="unbounded"
+																	minOccurs="0" fixed="">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="copyFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="copyTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="move" maxOccurs="1" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="moveFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="moveTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="folder" maxOccurs="unbounded"
+																	minOccurs="0" fixed="">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="moveFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="moveTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="rename" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="name"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="newname"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:all>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="sqls">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="sql" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="instancename" />
+																<xs:choice>
+																	<xs:element name="filename" minOccurs="0">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="xs:string">
+																					<xs:attribute type="xs:string" name="sqldelimiter" />
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element type="xs:string" name="sqlstatement"
+																		minOccurs="0" />
+																</xs:choice>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="properties">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="property" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="name" type="xs:string"
+																	minOccurs="0" />
+																<xs:element name="value" type="xs:string"
+																	minOccurs="0" />
+															</xs:sequence>
+															<xs:attribute name="operation">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="add" />
+																		<xs:enumeration value="delete" />
+																		<xs:enumeration value="modify" />
+																		<xs:enumeration value="rename" />
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute type="xs:string" name="file"
+																use="required" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="postinstall">
+								<xs:complexType>
+									<xs:all>
+										<xs:element name="servicecommands">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="stopservice" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute type="xs:string" name="validateProcessText" />
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="stopprocess" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="kill" default="N">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="Y" />
+																				<xs:enumeration value="N" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="startservice" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute type="xs:string" name="validateProcessText" />
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="startprocess" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="oscommands">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="oscommand" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="fileoperations">
+											<xs:complexType>
+												<xs:all>
+													<xs:element name="backup" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="file"
+																	maxOccurs="unbounded" minOccurs="0" />
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="delete" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="file"
+																	maxOccurs="unbounded" minOccurs="0" />
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="copy" maxOccurs="1" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="copyFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="copyTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="folder" maxOccurs="unbounded"
+																	minOccurs="0" fixed="">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="copyFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="copyTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="move" maxOccurs="1" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="moveFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="moveTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="folder" maxOccurs="unbounded"
+																	minOccurs="0" fixed="">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="moveFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="moveTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="rename" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="name"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="newname"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:all>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="sqls">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="sql" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="instancename" />
+																<xs:choice>
+																	<xs:element name="filename" minOccurs="0">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="xs:string">
+																					<xs:attribute type="xs:string" name="sqldelimiter" />
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element type="xs:string" name="sqlstatement"
+																		minOccurs="0" />
+																</xs:choice>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="properties">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="property" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="name" type="xs:string"
+																	minOccurs="0" />
+																<xs:element name="value" type="xs:string"
+																	minOccurs="0" />
+															</xs:sequence>
+															<xs:attribute name="operation">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="add" />
+																		<xs:enumeration value="delete" />
+																		<xs:enumeration value="modify" />
+																		<xs:enumeration value="rename" />
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute type="xs:string" name="file"
+																use="required" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="uninstallsequence">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="preuninstall">
+								<xs:complexType>
+									<xs:all>
+										<xs:element name="servicecommands">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="stopservice" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute type="xs:string" name="validateProcessText" />
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="stopprocess" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="kill" default="N">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="Y" />
+																				<xs:enumeration value="N" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="startservice" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute type="xs:string" name="validateProcessText" />
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="startprocess" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="oscommands">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="oscommand" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="fileoperations">
+											<xs:complexType>
+												<xs:all>
+													<xs:element name="restore" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="file"
+																	maxOccurs="unbounded" minOccurs="0" />
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="delete" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="file"
+																	maxOccurs="unbounded" minOccurs="0" />
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="copy" maxOccurs="1" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="copyFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="copyTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="folder" maxOccurs="unbounded"
+																	minOccurs="0" fixed="">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="copyFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="copyTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="move" maxOccurs="1" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="moveFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="moveTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="folder" maxOccurs="unbounded"
+																	minOccurs="0" fixed="">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="moveFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="moveTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="rename" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="name"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="newname"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:all>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="sqls">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="sql" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="instancename" />
+																<xs:choice>
+																	<xs:element name="filename" minOccurs="0">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="xs:string">
+																					<xs:attribute type="xs:string" name="sqldelimiter" />
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element type="xs:string" name="sqlstatement"
+																		minOccurs="0" />
+																</xs:choice>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="properties">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="property" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="name" type="xs:string"
+																	minOccurs="0" />
+																<xs:element name="value" type="xs:string"
+																	minOccurs="0" />
+															</xs:sequence>
+															<xs:attribute name="operation">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="add" />
+																		<xs:enumeration value="delete" />
+																		<xs:enumeration value="modify" />
+																		<xs:enumeration value="rename" />
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute type="xs:string" name="file"
+																use="required" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="uninstall">
+								<xs:complexType>
+									<xs:all>
+										<xs:element name="servicecommands">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="stopservice" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute type="xs:string" name="validateProcessText" />
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="stopprocess" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="kill" default="N">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="Y" />
+																				<xs:enumeration value="N" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="startservice" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute type="xs:string" name="validateProcessText" />
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="startprocess" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="oscommands">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="oscommand" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="fileoperations">
+											<xs:complexType>
+												<xs:all>
+													<xs:element name="restore" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="file"
+																	maxOccurs="unbounded" minOccurs="0" />
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="delete" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="file"
+																	maxOccurs="unbounded" minOccurs="0" />
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="copy" maxOccurs="1" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="copyFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="copyTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="folder" maxOccurs="unbounded"
+																	minOccurs="0" fixed="">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="copyFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="copyTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="move" maxOccurs="1" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="moveFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="moveTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="folder" maxOccurs="unbounded"
+																	minOccurs="0" fixed="">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="moveFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="moveTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="rename" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="name"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="newname"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:all>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="sqls">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="sql" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="instancename" />
+																<xs:choice>
+																	<xs:element name="filename" minOccurs="0">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="xs:string">
+																					<xs:attribute type="xs:string" name="sqldelimiter" />
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element type="xs:string" name="sqlstatement"
+																		minOccurs="0" />
+																</xs:choice>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="properties">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="property" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="name" type="xs:string"
+																	minOccurs="0" />
+																<xs:element name="value" type="xs:string"
+																	minOccurs="0" />
+															</xs:sequence>
+															<xs:attribute name="operation">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="add" />
+																		<xs:enumeration value="delete" />
+																		<xs:enumeration value="modify" />
+																		<xs:enumeration value="rename" />
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute type="xs:string" name="file"
+																use="required" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="postuninstall">
+								<xs:complexType>
+									<xs:all>
+										<xs:element name="servicecommands">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="stopservice" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute type="xs:string" name="validateProcessText" />
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="stopprocess" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="kill" default="N">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="Y" />
+																				<xs:enumeration value="N" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="startservice" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																	<xs:attribute type="xs:string" name="validateProcessText" />
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="startprocess" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="oscommands">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="oscommand" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:simpleContent>
+																<xs:extension base="xs:string">
+																	<xs:attribute name="osfamily" default="WINDOWS">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:enumeration value="WINDOWS" />
+																				<xs:enumeration value="UNIX" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:attribute>
+																</xs:extension>
+															</xs:simpleContent>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="fileoperations">
+											<xs:complexType>
+												<xs:all>
+													<!-- <xs:element name="backup" maxOccurs="1" minOccurs="0"> 
+														<xs:complexType> <xs:sequence> <xs:element type="xs:string" name="file" maxOccurs="unbounded" 
+														minOccurs="0"/> </xs:sequence> </xs:complexType> </xs:element> -->
+													<xs:element name="delete" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="file"
+																	maxOccurs="unbounded" minOccurs="0" />
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="copy" maxOccurs="1" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="copyFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="copyTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="folder" maxOccurs="unbounded"
+																	minOccurs="0" fixed="">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="copyFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="copyTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="move" maxOccurs="1" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="moveFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="moveTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="folder" maxOccurs="unbounded"
+																	minOccurs="0" fixed="">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="moveFrom"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="moveTo"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="rename" maxOccurs="1"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="file" maxOccurs="unbounded"
+																	minOccurs="0">
+																	<xs:complexType>
+																		<xs:simpleContent>
+																			<xs:extension base="xs:string">
+																				<xs:attribute type="xs:string" name="name"
+																					use="required" />
+																				<xs:attribute type="xs:string" name="newname"
+																					use="required" />
+																			</xs:extension>
+																		</xs:simpleContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:all>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="sqls">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="sql" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element type="xs:string" name="instancename" />
+																<xs:choice>
+																	<xs:element name="filename" minOccurs="0">
+																		<xs:complexType>
+																			<xs:simpleContent>
+																				<xs:extension base="xs:string">
+																					<xs:attribute type="xs:string" name="sqldelimiter" />
+																				</xs:extension>
+																			</xs:simpleContent>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element type="xs:string" name="sqlstatement"
+																		minOccurs="0" />
+																</xs:choice>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="properties">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="property" maxOccurs="unbounded"
+														minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="name" type="xs:string"
+																	minOccurs="0" />
+																<xs:element name="value" type="xs:string"
+																	minOccurs="0" />
+															</xs:sequence>
+															<xs:attribute name="operation">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="add" />
+																		<xs:enumeration value="delete" />
+																		<xs:enumeration value="modify" />
+																		<xs:enumeration value="rename" />
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute type="xs:string" name="file"
+																use="required" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>

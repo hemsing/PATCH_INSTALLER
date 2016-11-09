@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurations>
+	<configuration>
+		<installerversion>1.0</installerversion>
+		<productname>BMC PM Portal</productname>
+		<productversion>BPM 2.9.12</productversion>
+		<mincompatibleversion>BPM 2.9.10</mincompatibleversion>
+		<prodservicename>BMC Portal</prodservicename>
+		<prodprocessname>BMCPortal.exe</prodprocessname>
+		<installsequence>
+			<preinstall>
+				<servicecommands>
+					<stopservice osfamily="WINDOWS">BMC PM Portal</stopservice>
+					<stopprocess kill="Y" osfamily="WINDOWS">BMC PM Portal</stopprocess>
+					<startservice osfamily="WINDOWS"></startservice>
+					<startprocess osfamily="WINDOWS"></startprocess>
+				</servicecommands>
+				<oscommands>
+					<oscommand osfamily="WINDOWS">something.bat</oscommand>
+					<oscommand osfamily="UNIX">something.sh or direct command</oscommand>
+				</oscommands>
+				<fileoperations>
+					<backup>
+						<file>appserver/websdk/conf</file>
+						<file>appserver/websdk/tools/jboss/server/all/deploy</file>
+						<file>appserver/websdk/tools/jboss/server/all/deploy-hasingleton</file>
+					</backup>
+					<delete>
+						<file>appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/drmop-services-2.9.*.jar</file>
+						<file>appserver/websdk/tools/jboss/server/all/deploy/websdk.sar/websdk.jar</file>
+						<file>appserver/websdk/tools/jboss/server/all/modules/drmop.sar/drmop.war/WEB-INF/lib/drmopjsp.jar</file>
+					</delete>
+					<copy>
+						<file copyFrom="appserver/websdk/tools/jboss/" copyTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<file copyFrom="appserver/websdk/tools/jboss/" copyTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<file copyFrom="appserver/websdk/tools/jboss/" copyTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<folder copyFrom="appserver/websdk/tools/jboss/" copyTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/"/>
+					</copy>
+					<move>
+						<file moveFrom="appserver/websdk/tools/jboss/" moveTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<file moveFrom="appserver/websdk/tools/jboss/" moveTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<file moveFrom="appserver/websdk/tools/jboss/" moveTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<folder moveFrom="appserver/websdk/tools/jboss/" moveTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/"/>
+					</move>
+					<rename>
+						<file name="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/drmop-services-2.9.31.jar" newname="drmop-services-2.9.33.jar"/>
+						<file name="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/drmop-services-2.9.31.jar" newname="drmop-services-2.9.33.jar"/>
+					</rename>
+				</fileoperations>
+				<sqls>
+					<sql>
+					<instancename>BMCPDS</instancename>
+					<filename sqldelimiter="/">patches/sql/utility/scripts/util.sql</filename>
+					</sql>
+					<sql>
+					<instancename>BMCPDS</instancename>
+					<sqlstatement>select * from node</sqlstatement>
+					</sql>
+				</sqls>
+				<properties>
+					<property operation="add" file="appserver/websdk/tools/jboss/server/all/modules/drmop.properties">
+						<name>abc.efg.hij</name>
+						<value>askdnas</value>
+					</property>
+					<property operation="delete" file="appserver/websdk/tools/jboss/server/all/modules/drmop.properties">
+						<name>abc.efg.hij</name>
+						<value></value>
+					</property>
+					<property operation="modify" file="appserver/websdk/tools/jboss/server/all/modules/drmop.properties">
+						<name>abc.efg.hij</name>
+						<value>askdnas</value>
+					</property>
+					<property operation="rename" file="appserver/websdk/tools/jboss/server/all/modules/drmop.properties">
+						<name>abc.efg.hij</name>
+						<value>abc.efg.hik</value>
+					</property>
+				</properties>
+			</preinstall>
+			<install>
+				<servicecommands>
+					<stopservice osfamily="WINDOWS">BMC PM Portal</stopservice>
+					<stopprocess kill="Y" osfamily="WINDOWS">BMC PM Portal</stopprocess>
+					<startservice osfamily="WINDOWS"></startservice>
+					<startprocess osfamily="WINDOWS"></startprocess>
+				</servicecommands>
+				<oscommands>
+					<oscommand osfamily="WINDOWS">something.bat</oscommand>
+					<oscommand osfamily="UNIX">something.sh or direct command</oscommand>
+				</oscommands>
+				<fileoperations>
+					<backup>
+						<file>appserver/websdk/conf</file>
+						<file>appserver/websdk/tools/jboss/server/all/deploy</file>
+						<file>appserver/websdk/tools/jboss/server/all/deploy-hasingleton</file>
+					</backup>	
+					<delete>
+						<file>appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/drmop-services-2.9.*.jar</file>
+						<file>appserver/websdk/tools/jboss/server/all/deploy/websdk.sar/websdk.jar</file>
+						<file>appserver/websdk/tools/jboss/server/all/modules/drmop.sar/drmop.war/WEB-INF/lib/drmopjsp.jar</file>
+					</delete>
+					<copy>
+						<file copyFrom="appserver/websdk/tools/jboss/" copyTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<file copyFrom="appserver/websdk/tools/jboss/" copyTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<file copyFrom="appserver/websdk/tools/jboss/" copyTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<folder copyFrom="appserver/websdk/tools/jboss/" copyTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/"/>
+					</copy>
+					<move>
+						<file moveFrom="appserver/websdk/tools/jboss/" moveTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<file moveFrom="appserver/websdk/tools/jboss/" moveTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<file moveFrom="appserver/websdk/tools/jboss/" moveTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<folder moveFrom="appserver/websdk/tools/jboss/" moveTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/"/>
+					</move>
+					<rename>
+						<file name="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/drmop-services-2.9.31.jar" newname="drmop-services-2.9.33.jar"/>
+						<file name="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/drmop-services-2.9.31.jar" newname="drmop-services-2.9.33.jar"/>
+					</rename>
+				</fileoperations>
+				<sqls>
+					<sql>
+					<instancename>BMCPDS</instancename>
+					<filename sqldelimiter="/">patches/sql/utility/scripts/util.sql</filename>
+					</sql>
+					<sql>
+					<instancename>BMCPDS</instancename>
+					<sqlstatement>select * from node</sqlstatement>
+					</sql>
+				</sqls>
+				<properties>
+					<property operation="add" file="appserver/websdk/tools/jboss/server/all/modules/drmop.properties">
+						<name>abc.efg.hij</name>
+						<value>askdnas</value>
+					</property>
+					<property operation="delete" file="appserver/websdk/tools/jboss/server/all/modules/drmop.properties">
+						<name>abc.efg.hij</name>
+						<value></value>
+					</property>
+					<property operation="modify" file="appserver/websdk/tools/jboss/server/all/modules/drmop.properties">
+						<name>abc.efg.hij</name>
+						<value>askdnas</value>
+					</property>
+				</properties>
+			</install>
+			<postinstall>
+				<servicecommands>
+					<stopservice osfamily="WINDOWS">BMC PM Portal</stopservice>
+					<stopprocess kill="Y" osfamily="WINDOWS">BMC PM Portal</stopprocess>
+					<startservice osfamily="WINDOWS"></startservice>
+					<startprocess osfamily="WINDOWS"></startprocess>
+				</servicecommands>
+				<oscommands>
+					<oscommand osfamily="WINDOWS">something.bat</oscommand>
+					<oscommand osfamily="UNIX">something.sh or direct command</oscommand>
+				</oscommands>
+				<fileoperations>
+					<backup>
+						<file>appserver/websdk/conf</file>
+						<file>appserver/websdk/tools/jboss/server/all/deploy</file>
+						<file>appserver/websdk/tools/jboss/server/all/deploy-hasingleton</file>
+					</backup>	
+					<delete>
+						<file>appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/drmop-services-2.9.*.jar</file>
+						<file>appserver/websdk/tools/jboss/server/all/deploy/websdk.sar/websdk.jar</file>
+						<file>appserver/websdk/tools/jboss/server/all/modules/drmop.sar/drmop.war/WEB-INF/lib/drmopjsp.jar</file>
+					</delete>
+					<copy>
+						<file copyFrom="appserver/websdk/tools/jboss/" copyTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<file copyFrom="appserver/websdk/tools/jboss/" copyTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<file copyFrom="appserver/websdk/tools/jboss/" copyTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<folder copyFrom="appserver/websdk/tools/jboss/" copyTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/"/>
+					</copy>
+					<move>
+						<file moveFrom="appserver/websdk/tools/jboss/" moveTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<file moveFrom="appserver/websdk/tools/jboss/" moveTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<file moveFrom="appserver/websdk/tools/jboss/" moveTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/">drmop-services-2.9.*.jar</file>
+						<folder moveFrom="appserver/websdk/tools/jboss/" moveTo="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/"/>
+					</move>
+					<rename>
+						<file name="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/drmop-services-2.9.31.jar" newname="drmop-services-2.9.33.jar"/>
+						<file name="appserver/websdk/tools/jboss/server/all/modules/drmop.sar/lib/drmop-services-2.9.31.jar" newname="drmop-services-2.9.33.jar"/>
+					</rename>
+				</fileoperations>
+				<sqls>
+					<sql>
+						<instancename>BMCPDS</instancename>
+						<filename sqldelimiter="/">patches/sql/utility/scripts/util.sql</filename>
+					</sql>
+					<sql>
+						<instancename>BMCPDS</instancename>
+						<sqlstatement>select * from node</sqlstatement>
+					</sql>
+				</sqls>
+				<properties>
+					<property operation="add" file="appserver/websdk/tools/jboss/server/all/modules/drmop.properties">
+						<name>abc.efg.hij</name>
+						<value>askdnas</value>
+					</property>
+					<property operation="delete" file="appserver/websdk/tools/jboss/server/all/modules/drmop.properties">
+						<name>abc.efg.hij</name>
+						<value></value>
+					</property>
+					<property operation="modify" file="appserver/websdk/tools/jboss/server/all/modules/drmop.properties">
+						<name>abc.efg.hij</name>
+						<value>askdnas</value>
+					</property>
+				</properties>
+			</postinstall>
+		</installsequence>
+	</configuration>
+</configurations>

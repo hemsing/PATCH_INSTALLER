@@ -1,0 +1,4 @@
+com\bmc\util\misc\LoggerHelper.class
+com\bmc\util\database\impl\DatabasHelperImplJunitTest.class
+com\bmc\util\io\impl\GenericFileHelperImplJunitTest.class
+com\bmc\util\misc\EnvironmentHelperJunit.class
